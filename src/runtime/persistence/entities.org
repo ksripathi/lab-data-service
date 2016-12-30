@@ -109,6 +109,52 @@ class TestPersistenceExperiment(TestCase):
 
 #+END_SRC
 
+
+* Discipline
+  =Discipline= is a class with attributes =dis_name= and =dis_id= of type =is_email_str=.
+#+NAME: class_Discipline
+#+begin_src python
+args = {"__tablename__": "discipline",
+        "id": db.Column(db.Integer, primary_key=True),
+        "dis_name": db.Column(db.String(255), unique=False, nullable=True),
+        "dis_id": db.Column(db.String(255), unique=True, nullable=False)
+       
+        }
+
+Discipline = ClassPersistenceTemplate.mk_persistent(Discipline, ['dis_id'], **args)
+
+#+end_src
+
+** Test Discipline
+#+NAME: class_TestDiscipline
+#+BEGIN_SRC python
+class TestPersistenceDiscipline(TestCase):
+    TESTING = True
+
+    def create_app(self):
+        app = create_app(config)
+        return app
+
+    def setUp(self):
+        db.create_all()
+
+    def tearDown(self):
+        db.session.remove()
+        db.drop_all()
+
+    def test_create_discipline(self):
+        print "test_persistance_discipline"
+        dis_name = "IIT Delhi"
+        dis_id = "ECE08"
+        dis = Discipline(dis_name=dis_name, dis_id=dis_id)
+        dis.save()
+        discipline = Discipline.get_by_id(1)
+        self.assertEqual(discipline.get("dis_name"), dis_name)
+        self.assertEqual(discipline.get("dis_id"), dis_id)
+
+
+#+END_SRC
+
    
 * Feedback
   A =Feedback= entity has fields =response= of type =Response=.
@@ -323,6 +369,7 @@ if __name__ == '__main__':
 ** sources
 #+BEGIN_SRC python :tangle entities.py :eval no :noweb yes
 <<imports_for_sources>>
+<<class_Discipline>>
 <<class_Lab>>
 <<class_Experiment>>
 #+end_src
@@ -331,6 +378,7 @@ if __name__ == '__main__':
 ** tests
 #+BEGIN_SRC python :tangle test_entities.py :eval no :noweb yes
 <<imports_for_tests>>
+<<class_TestDiscipline>>
 <<class_TestLab>>
 <<class_TestExperiment>>
 #<<class_TestAnswer>>
