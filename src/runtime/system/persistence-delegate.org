@@ -62,31 +62,62 @@ class TestPersistenceDelegate(TestCase):
     This function checks if a discipline is already in the discipline-set of the =System=.
 #+NAME: persistence_discipline_exists
 #+BEGIN_SRC python
-    def discipline_exists(self, discipline):
-        dis_id = discipline.get("dis_id")
-        return discipline == self.get_discipline(dis_id=dis_id)
+   # def discipline_exists(self, discipline):
+    #    dis_id = discipline.get("dis_id")
+     #   return discipline == self.get_discipline(dis_id=dis_id)
+
+     def discipline_exists(self, ds_id):
+        ret_val = False
+        try:
+            if Discipline.get_by_id(ds_id) is not None:
+                ret_val = True
+        except Exception as e:
+            pass
+
+     return ret_val
+
         
 #+END_SRC
 
 **** Tests
 #+NAME: test_persistence_discipline_exists
 #+BEGIN_SRC python
-    def test_discipline_exists(self):
+   # def test_discipline_exists(self):
+    #    print "test_discipline_exists"
+     #   dis_name1="IIT Delhi"
+      #  dis_id1="EEE08"
+       # dis = Discipline(dis_name=dis_name1, dis_id=dis_id1)
+
+        #dis1 = self.persistence_delegate.add_discipline(dis)
+
+        #dis_name2="IIT Delhi"
+        #dis_id2="EEE09"
+        #dis2 = Discipline(dis_name=dis_name2, dis_id=dis_id2)
+
+        #self.assertEqual(self.persistence_delegate.discipline_exists(dis1),
+                           # True)
+        #self.assertEqual(self.persistence_delegate.discipline_exists(dis2),
+                           # False)
+
+
+
+def test_discipline_exists(self):
         print "test_discipline_exists"
         dis_name1="IIT Delhi"
         dis_id1="EEE08"
-        dis = Discipline(dis_name=dis_name1, dis_id=dis_id1)
+        dis = Discipline(dis_name=dis_name1, dis_id=dis_id1, discipline=[])
 
         dis1 = self.persistence_delegate.add_discipline(dis)
 
         dis_name2="IIT Delhi"
         dis_id2="EEE09"
-        dis2 = Discipline(dis_name=dis_name2, dis_id=dis_id2)
+        dis2 = Discipline(dis_name=dis_name2, dis_id=dis_id2, discipline=[])
 
-        self.assertEqual(self.persistence_delegate.discipline_exists(dis1),
+        self.assertEqual(self.persistence_delegate.lab_exists(dis1.id),
                             True)
-        self.assertEqual(self.persistence_delegate.discipline_exists(dis2),
+        self.assertEqual(self.persistence_delegate.discipline_exists(dis2.id),
                             False)
+
 
 #+END_SRC
    
@@ -95,9 +126,20 @@ class TestPersistenceDelegate(TestCase):
     This function checks if a lab is already in the lab-set of the =System=.
 #+NAME: persistence_lab_exists
 #+BEGIN_SRC python
-    def lab_exists(self, lab):
-        lab_id = lab.get("lab_id")
-        return lab == self.get_lab(lab_id=lab_id)
+   # def lab_exists(self, lab):
+    #    lab_id = lab.get("lab_id")
+     #   return lab == self.get_lab(lab_id=lab_id)
+
+def lab_exists(self, lb_id):
+        ret_val = False
+
+        try:
+            if Lab.get_by_id(lb_id) is not None:
+                ret_val = True
+        except Exception as e:
+            pass
+
+        return ret_val
         
 #+END_SRC
 
@@ -105,21 +147,40 @@ class TestPersistenceDelegate(TestCase):
 #+NAME: test_persistence_lab_exists
 #+BEGIN_SRC python
     def test_lab_exists(self):
+        #print "test_lab_exists"
+        #lab_name1="Computer Programming"
+        #lab_id1="CSE01"
+        #lab = Lab(lab_name=lab_name1, lab_id=lab_id1)
+
+        #lab1 = self.persistence_delegate.add_lab(lab)
+
+        #lab_name2="Data Structures"
+        #lab_id2="CSE02"
+        #lab2 = Lab(lab_name=lab_name2, lab_id=lab_id2)
+
+        #self.assertEqual(self.persistence_delegate.lab_exists(lab1),
+                            #True)
+        #self.assertEqual(self.persistence_delegate.lab_exists(lab2),
+                            #False)
+
+
+ def test_lab_exists(self):
         print "test_lab_exists"
         lab_name1="Computer Programming"
         lab_id1="CSE01"
-        lab = Lab(lab_name=lab_name1, lab_id=lab_id1)
+        lab = Lab(lab_name=lab_name1, lab_id=lab_id1, experiments=[])
 
         lab1 = self.persistence_delegate.add_lab(lab)
 
         lab_name2="Data Structures"
         lab_id2="CSE02"
-        lab2 = Lab(lab_name=lab_name2, lab_id=lab_id2)
+        lab2 = Lab(lab_name=lab_name2, lab_id=lab_id2, experiments=[])
 
-        self.assertEqual(self.persistence_delegate.lab_exists(lab1),
+        self.assertEqual(self.persistence_delegate.lab_exists(lab1.id),
                             True)
-        self.assertEqual(self.persistence_delegate.lab_exists(lab2),
+        self.assertEqual(self.persistence_delegate.lab_exists(lab2.id),
                             False)
+
 
 #+END_SRC
 
