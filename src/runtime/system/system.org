@@ -134,6 +134,10 @@ class TestSystemConstructor(TestCase):
 
 
 ** Arity and Type check methods 
+  :PROPERTIES:
+  :CUSTOM_ID: 
+  :END: 
+
    Arity Check ensures that correct number of arguments are passed to a
    functions.  Type Check ensures that the type of the arguments passed to a
    function are same as expected.
@@ -241,7 +245,7 @@ class AddDiscipline():
     @staticmethod
     def state_check(args):
         discipline = args["discipline"]
-        if System.delegate.discipline_exists():
+        if System.delegate.discipline_exists(discipline):
             raise StateError("discipline %s already exists in System"
                                  % discipline.to_client())
 
@@ -252,7 +256,6 @@ class AddDiscipline():
         return discipline
 
 #+end_src
-
 
 
 ** =AddLab=
@@ -662,7 +665,8 @@ ops_table = {'add_lab' : AddLab,
              'delete_lab': DeleteLab,
              'add_experiment' : AddExperiment,
              'update_experiment' : UpdateExperiment,
-             'delete_experiment' : DeleteExperiment 
+             'delete_experiment' : DeleteExperiment,
+             'add_discipline' : AddDiscipline
              }
 
  #+END_SRC   

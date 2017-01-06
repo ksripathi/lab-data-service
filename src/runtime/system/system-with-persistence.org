@@ -15,6 +15,39 @@ def populate_db():
 #+END_SRC
 
 
+* Test AddDiscipline
+#+NAME: test_add_experiment
+#+BEGIN_SRC python
+class TestAddDiscipline(TestCase):
+    TESTING = True
+
+    def create_app(self):
+        app = create_app(config)
+        return app
+
+    def setUp(self):
+        db.create_all()
+
+    def tearDown(self):
+        db.session.remove()
+        db.drop_all()
+
+    def test_add_discipline(self):
+        print "test_add_discipline_in_system_persistence"
+        session_cls = System.delegate.entities['session']
+        discipline_cls = System.delegate.entities['discipline']
+        dis_name = "arrays"
+        dis_id = "cse02"
+        discipline = discipline_cls(dis_name=dis_name, dis_id=dis_id)
+        key = KEY
+        session = session_cls(key=key)
+        discipline = System.do("add_discipline", discipline=discipline, session=session)
+        discipline1 = discipline_cls.get_by_id(1)
+        self.assertEqual(discipline1.get("dis_name"), dis_name)
+            
+#+END_SRC
+
+
 * Test AddLab
 #+NAME: test_add_lab
 #+BEGIN_SRC python
@@ -431,6 +464,7 @@ if __name__ == '__main__':
 #+BEGIN_SRC python :tangle test_persistence_system.py :eval no :noweb yes
 <<imports_for_tests>>
 <<populate_db>>
+<<test_add_discipline>>
 <<test_add_lab>>
 <<test_add_experiment>>
 #<<test_delete_question>>

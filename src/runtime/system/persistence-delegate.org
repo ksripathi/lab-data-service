@@ -25,7 +25,8 @@ class PersistenceDelegate():
     def __init__(self):
         self.entities = {'session': Session,
                          'lab': Lab,
-                         'experiment' : Experiment
+                         'experiment' : Experiment,
+                         'discipline' : Discipline
 
                         }
 
@@ -109,6 +110,7 @@ class TestPersistenceDelegate(TestCase):
         lab_id = lab.get("lab_id")
         return lab == self.get_lab(lab_id=lab_id)
 
+   
 
         
 #+END_SRC
@@ -133,8 +135,7 @@ class TestPersistenceDelegate(TestCase):
         self.assertEqual(self.persistence_delegate.lab_exists(lab2),
                             False)
 
-
-
+    
 
 #+END_SRC
 
