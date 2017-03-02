@@ -1878,7 +1878,7 @@ ops_table = {'add_lab' : AddLab,
              'delete_asset': DeleteAsset,
              'get_asset': GetAsset,
              'update_asset': UpdateAsset,
-             'add_assets_to_lab': AddAssetsToLab
+             'add_assets_to_lab': AddAssetsToLab,
              #'get_labs_by_asset': GetLabsByAsset,
              #'get_asset_by_asset_type': GetAssetByAssetType
              }
