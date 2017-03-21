@@ -134,10 +134,16 @@
         "path": "vlabs.ac.in/video/abc.mkv"
       }
     ],
-    "overview": "This lab deals with computer programming",
-    "experiments": [
-      "e100",
-      "e200"
+    "sections": [
+      {
+        "name": "Introduction"
+      },
+      {
+        "experiments": [
+          "e100",
+          "e200"
+        ]
+      }
     ]
   }
 }
@@ -147,18 +153,23 @@
 ** Institute Specification
    Each =Institute= is identified by a unique =inst_id=. 
 #+BEGIN_SRC 
-{
-"inst_id": "IIITH",
-"inst_name": "IIIT Hyderabad"
-}
+[
+  {
+    "inst_id": "IIITH",
+    "inst_name": "IIIT Hyderabad"
+  }
+]
+
 #+END_SRC
 ** Discipline Specification
    Each =Discipline= is identified by a unique =dis_id=. 
 #+BEGIN_SRC 
-{
-  "dis_id": "CSE", 
-  "dis_name": "Computer Science and Engineering"
-}
+[
+  {
+    "dis_id": "CSE",
+    "dis_name": "Computer Science and Engineering"
+  }
+]
 
 #+END_SRC
 
